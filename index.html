@@ -25,22 +25,28 @@
     animate();
 
     function init() {
+      // init scene structure (color is hexdadecimal)
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xdddddd);
 
+      // Render WebGL
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
+      // มุมมองแบบ สามมิติ
       camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
       camera.position.set(0, 1, 5);
 
+      // Init orbitcontrols ทำให้เราหมุนวัตถุได้
       controls = new THREE.OrbitControls(camera, renderer.domElement);
       controls.addEventListener('change', renderer);
 
-      hlight = new THREE.AmbientLight(0x404040, 100);
+      // add color of scene
+      hlight = new THREE.AmbientLight(0xcccccc);
       scene.add(hlight);
 
+      // add light
       directionalLight = new THREE.DirectionalLight(0xffffff, 100);
       directionalLight.position.set(0, 1, 0);
       directionalLight.castShadow = true;
@@ -71,6 +77,7 @@
     }
 
     function animate() {
+      // Render animation
       requestAnimationFrame(animate);
       renderer.render(scene, camera);
     }
